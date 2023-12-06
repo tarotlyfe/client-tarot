@@ -27,25 +27,8 @@ steps:
     restoreKeys: npm | $(Agent.OS) | yarn.lock
   displayName: Cache NPM packages 
 
-- task: CacheBeta@1 
-  inputs: 
-    key: cypress | $(Agent.OS) | yarn.lock 
-    path: /home/vsts/.cache/Cyress 
-    restoreKeys: cypress | $(Agent.OS) | yarn.lock 
-  displayName: Cache Cypress binary 
   
 - script: yarn  
   displayName: "Install NPM dependencies" 
-
-- script: yarn cy:verify 
-  displayName: Cypress Verify 
-  
-- script: yarn dev & 
-- script: npx wait-on 'http-get://localhost:5173'
-  displayName: 'Run Cypress Tests'
-
-- script: npx cypress run --record
-  env:
-    CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
 
 

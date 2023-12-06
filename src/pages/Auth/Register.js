@@ -40,7 +40,7 @@ const Register = () => {
         <div className='shape'></div>
       </div>
       <form className='register-form' onSubmit={handleRegister}>
-        <h3>Register Here</h3>
+        <h3 data-test='page-name'>Register Here</h3>
         <label htmlFor='name'>Your Name</label>
         <input
           type='text'
