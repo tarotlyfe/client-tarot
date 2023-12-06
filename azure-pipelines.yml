@@ -31,4 +31,13 @@ steps:
 - script: yarn  
   displayName: "Install NPM dependencies" 
 
+- task: Bash@3
+  inputs:
+    filePath: './cicd-api.sh'
+  
+- task: PublishTestResults@2
+  displayName: 'publish testsigma test results'  
+  inputs:    
+    testResultsFormat: 'Junit'
+    testResultsFiles: '**/junit-report.xml'
 
