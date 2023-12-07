@@ -1,10 +1,33 @@
-TESTSIGMA_API_KEY="3a4c17a28b4e4183b569e12f84efc231"
-TESTSIGMA_TEST_PLAN_ID=309
+#!/bin/bash
+#**********************************************************************
+#
+# TESTSIGMA_API_KEY -> API key generated under Testsigma App >> Configuration >> API Keys
+#
+# TESTSIGMA_TEST_PLAN_ID -> Testsigma Testplan ID.
+# You can get this from Testsigma App >> Test Plans >> <TEST_PLAN_NAME> >> CI/CD Integration
+#
+# MAX_WAIT_TIME_FOR_SCRIPT_TO_EXIT -> Maximum time in minutes the script will wait for TEST Plan execution to complete. 
+# The sctript will exit if the Maximum time is exceeded. However, the Test Plan will continue to run. 
+# You can check test results by logging to Testsigma.
+#
+# JUNIT_REPORT_FILE_PATH -> File name with directory path to save the report.
+# For Example, <DIR_PATH>/report.xml, ./report.xml
+# 
+# RUNTIME_DATA_INPUT -> Specify runtime parameters/variables to be used in the tests in comma-separated manner
+# For example, "url=https://the-internet.herokuapp.com/login,variable1=value1"
+#
+# BUILD_NO -> Specify Build number if you want to track the builds in Testsigma. It will show up in the Test Results page
+# For example, we are using $(date +"%Y%m%d%H%M") to use current data and time as build number.
+#
+#********START USER_INPUTS*********
+TESTSIGMA_API_KEY=3a4c17a28b4e4183b569e12f84efc231
+TESTSIGMA_TEST_PLAN_ID=2090
 MAX_WAIT_TIME_FOR_SCRIPT_TO_EXIT=1
 JUNIT_REPORT_FILE_PATH=./junit-report-$(date +"%Y%m%d%H%M").xml
-RUNTIME_DATA_INPUT="url=https://the-internet.herokuapp.com/login,test=1221"
-BUILD_NO=$(date +"%Y%m%d%H%M")
 
+BUILD_NO=$(date +"%Y%m%d%H%M")
+#********END USER_INPUTS***********
+ 
 #********GLOBAL variables**********
 POLL_COUNT=30
 SLEEP_TIME=$(((MAX_WAIT_TIME_FOR_SCRIPT_TO_EXIT*60)/$POLL_COUNT))

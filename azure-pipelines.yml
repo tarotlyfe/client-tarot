@@ -31,13 +31,19 @@ steps:
 - script: yarn  
   displayName: "Install NPM dependencies" 
 
-- task: Bash@3
-  inputs:
-    filePath: './cicd-api.sh'
-  
-- task: PublishTestResults@2
-  displayName: 'publish testsigma test results'  
-  inputs:    
-    testResultsFormat: 'Junit'
-    testResultsFiles: '**/junit-report.xml'
+- script: yarn build 
+  displayName: 'Build'
 
+- task: ArchiveFiles@2
+  inputs: 
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false 
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true 
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathToPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
